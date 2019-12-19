@@ -1,0 +1,118 @@
+<div class="card mt-5">
+    <div class="card-body">
+        <h2 class="card-title mb-4">Add new product</h2>
+
+        <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
+
+
+            <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="productService.selectedProduct.$key">
+            <div class="form-group">
+                <label for="formGroupNameInput">Name</label>
+
+                <input type="text" class="form-control" name="name" #name="ngModel" [(ngModel)]="productService.selectedProduct.name" placeholder="Add product name">
+            </div>
+
+            <div class="form-group">
+                <label for="formGroupCategoryInput">Category</label>
+
+                <input type="text" class="form-control" name="category" #category="ngModel" [(ngModel)]="productService.selectedProduct.category" placeholder="Add product category">
+            </div>
+
+            <!-- <div class="form-group">
+                <label for="formGroupLocationInput">Location</label>
+
+                <input type="text" class="form-control" name="location" #location="ngModel" [(ngModel)]="productService.selectedProduct.location" placeholder="Add product location">
+            </div> -->
+
+            <div class="form-group">
+                <label for="inputState">State</label>
+                <select id="inputState" class="form-control" name="location" #location="ngModel" [(ngModel)]="productService.selectedProduct.location">
+                  <option selected>Choose...</option>
+                  <option>Lara</option>
+                  <option>Zulia</option>
+                  <option>Falcon</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="inputCity">City</label>
+                <select id="inputCity" class="form-control" name="city" #city="ngModel" [(ngModel)]="productService.selectedProduct.city">
+                  <option>Lara</option>
+                  <option>Zulia</option>
+                  <option>Falcon</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="formGroupPriceInput">Price</label>
+
+                <input type="number" class="form-control" name="price" #price="ngModel" [(ngModel)]="productService.selectedProduct.price" placeholder="Add product price">
+            </div>
+
+            <!-- Upload img -->
+            <div class="form-group">
+                <h3>Select img</h3>
+                <input type="file" accept=".png, .jpg" (change)="onUpload($event)">
+            </div>
+
+            <input type="hidden" [value]="imgUrl | async">
+
+            <!-- Buttons -->
+            <div class="form-group">
+
+                <!-- add -->
+                <button *ngIf="name.value && category.value && location.value && price.value; else btn2Disabled" type="submit" class="btn btn-success btn-block">Add <i class="fas fa-plus"></i></button>
+                <!-- reset -->
+                <button *ngIf="name.value || category.value  || price.value; else btnDisabled" type="reset" class="btn btn-primary btn-block">Reset <i class="fas fa-sync-alt" (click)="resetForm(productForm)"></i></button>
+
+
+                <!--  BTN DISABLED -->
+                <ng-template #btn2Disabled>
+                    <button type="submit" class="btn btn-secondary btn-block" disabled="true">Add <i class="fas fa-plus"></i></button>
+                </ng-template>
+
+                <ng-template #btnDisabled>
+                    <button type="reset" class="btn btn-secondary btn-block" disabled="true">Reset <i class="fas fa-sync-alt"></i></button>
+                </ng-template>
+
+            </div>
+
+
+
+        </form>
+
+
+
+        <!--  UPLOAD "BULMA"   -->
+        <!-- <div class="contenedor">
+            <div class="contenedor_formulario">
+                <h1 class="is-size-1">Subir archivos a Cloud Storage</h1>
+                <p class="download">URL de descarga: <a href="#" target="_blank">Descargar</a></p>
+                <form>
+                    <div class="file has-name is-boxed">
+                        <label class="file-label">
+                    <input class="file-input" type="file" name="resume">
+                    <span class="file-cta">
+                      <span class="file-label">
+                        Elegir un archivo…
+                      </span>
+                    </span>
+                    <span class="file-name">
+                      No hay un archivo seleccionado
+                    </span>
+                  </label>
+                    </div>
+                    <hr>
+                    <progress class="progress is-large is-success" value="0" max="100">0%</progress>
+                    <button class="button is-success is-large">Subir archivo</button>
+                </form>
+            </div>
+        </div> -->
+
+
+
+    </div>
+</div>
+<img *ngIf="imgUrl | async; else imgPrev" [src]="imgUrl | async" width="600" alt="Prev">
+<ng-template #imgPrev>
+</ng-template>

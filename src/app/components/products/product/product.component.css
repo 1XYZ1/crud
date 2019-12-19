@@ -1,0 +1,23 @@
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+}
+
+.contenedor .contenedor-formulario {
+    width: 400px;
+}
+
+.contenedor .download {
+    background: #1081ff;
+    color: #fff;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+
+.contenedor .download a {
+    text-decoration: underline;
+    color: #fff;
+}
